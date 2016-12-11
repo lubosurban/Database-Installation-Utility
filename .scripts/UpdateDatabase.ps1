@@ -132,7 +132,7 @@ try
     # ---------------------------------------------
     foreach($file in (Get-ChildItem -Path "$cfg_updatesDir" -Recurse -Filter "*.sql" -File -Force | Sort-Object DirectoryName, Name))
     {
-        $fileId = $file.Directory.Name + "\" + $file.Name
+        $fileId = $file.FullName.Replace("$cfg_updatesDir\", "")
 
         $fileAlreadyApplied = Invoke-SqlQuery -Query "SELECT dbo.ValidateUpdateScriptInstalled('$fileId') as Result" -ServerInstance $server -Database $database
         if($fileAlreadyApplied.Result -eq 0)
