@@ -23,7 +23,7 @@ function Save-Configuration
     $configPath = Split-Path -Path $configFile -Parent
     if(!(Test-Path -Path $configPath))
     {
-        New-Item -ItemType Directory -Force -Path $configPath
+        New-Item -ItemType Directory -Force -Path $configPath | Out-Null
     }
 
     $configValues | Export-Clixml $configFile -Force
