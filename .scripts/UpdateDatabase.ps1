@@ -169,6 +169,7 @@ try
 }
 catch
 {
+    Write-Host "Failed" -ForegroundColor Red
     $exception = $_
     $errorOccurred = $true
 }
