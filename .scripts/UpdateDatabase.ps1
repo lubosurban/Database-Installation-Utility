@@ -39,7 +39,7 @@ function Get-FileWReplacedPlaceholders
     )
 
     $outputFile = Join-Path -Path $tempDir -ChildPath ([guid]::NewGuid().ToString() + ".sql")
-    (Get-Content -Path "$inputFile" -Force).Replace("<%DatabaseName%>", $database) | Set-Content -Path "$outputFile" -Force
+    (Get-Content -Path "$inputFile" -Force).Replace("<%DatabaseName%>", $database) | Set-Content -Path "$outputFile" -Encoding UTF8 -Force
 
     return ($outputFile)
 }
