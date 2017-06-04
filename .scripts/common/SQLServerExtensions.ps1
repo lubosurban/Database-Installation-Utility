@@ -107,3 +107,44 @@ function Invoke-SQLFile
 
     Invoke-Sqlcmd -InputFile "$inputFile" -ServerInstance "$serverInstance" -Database "$database" -ErrorAction Stop @moreCmdParameters
 }
+
+# ---------------------------------------------
+# Function: Invoke-SQLFileAtServerLevel
+# ---------------------------------------------
+function Invoke-SQLFileAtServerLevel
+{
+    Param
+    (
+        [parameter(Mandatory=$true)]
+        [ValidateNotNullOrEmpty()]
+        [String] $inputFile,
+        [parameter(Mandatory=$true)]
+        [ValidateNotNullOrEmpty()]
+        [String] $serverInstance,
+        [String] $userName,
+        [String] $userPassword,
+        [Int] $queryTimeout = $null,
+        [switch] $verboseLog = $false
+    )
+
+    $moreCmdParameters = @{}
+
+    if ($verboseLog)
+    {
+        $moreCmdParameters.Add("Verbose", $true)
+    }
+
+    if ($queryTimeout)
+    {
+        $moreCmdParameters.Add("Querytimeout", $queryTimeout)
+    }
+
+    if ($userName)
+    {
+        $moreCmdParameters.Add("Username", $userName)
+        $moreCmdParameters.Add("Password", $userPassword)
+    }
+
+
+    Invoke-Sqlcmd -InputFile "$inputFile" -ServerInstance "$serverInstance" -ErrorAction Stop @moreCmdParameters
+}
