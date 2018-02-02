@@ -7,18 +7,12 @@
 $ErrorActionPreference = "Stop"
 
 # ---------------------------------------------
-# Script initialization
-# ---------------------------------------------
-$scriptDir = Split-Path -Path $myInvocation.MyCommand.Definition
-$rootDir = Resolve-Path "$scriptDir\.."
-
-# ---------------------------------------------
 # Includes
 # ---------------------------------------------
-. "$scriptDir\common\ConsoleInput.ps1"
-. "$scriptDir\common\SQLServerExtensions.ps1"
-. "$scriptDir\common\Configuration.ps1"
-. "$scriptDir\UpdateDatabase-cfg.ps1"
+. "$PSScriptRoot\common\ConsoleInput.ps1"
+. "$PSScriptRoot\common\SQLServerExtensions.ps1"
+. "$PSScriptRoot\common\Configuration.ps1"
+. "$PSScriptRoot\UpdateDatabase-cfg.ps1"
 
 # ---------------------------------------------
 # Function: Get-FileWReplacedPlaceholders
@@ -47,7 +41,7 @@ function Get-FileWReplacedPlaceholders
 # ================================================
 # Script body
 # ================================================
-$internalDbStructuresSqlScript = Join-Path -Path $scriptDir -ChildPath "sqlScripts\InternalDbStructures.sql"
+$internalDbStructuresSqlScript = Join-Path -Path $PSScriptRoot -ChildPath "sqlScripts\InternalDbStructures.sql"
 
 $errorOccurred = $false
 $restoreFromBackupNecessary = $false
